@@ -23,19 +23,10 @@ public class BaseReader<T> implements Reader<T> {
 
     private final Directory directory;
     private final ObjectMapper<T> objectMapper;
-    private final IndexReader indexReader;
-    private final IndexSearcher indexSearcher;
 
     public BaseReader(Directory directory, ObjectMapper<T> objectMapper) {
         this.directory = directory;
         this.objectMapper = objectMapper;
-        try {
-            this.indexReader = DirectoryReader.open(directory);
-        } catch (IOException e) {
-            log.error("Failed to create index reader");
-            throw new RuntimeException(e);
-        }
-        this.indexSearcher = new IndexSearcher(indexReader);
     }
 
     @Override
@@ -44,20 +35,27 @@ public class BaseReader<T> implements Reader<T> {
     }
 
     @Override
-    public List<T> find(Query query, int numberOfResults) {
+    public List<T> find(Query query, int size) {
         try {
-            final TopDocs topDocs = indexSearcher.search(query, numberOfResults);
-            return Stream.of(topDocs.scoreDocs)
-                    .map(this::getDocument)
+            IndexReader indexReader = DirectoryReader.open(directory);
+            IndexSearcher indexSearcher = new IndexSearcher(indexReader);
+
+            final TopDocs topDocs = indexSearcher.search(query, size);
+
+            final List<T> results = Stream.of(topDocs.scoreDocs)
+                    .map(scoreDoc -> getDocument(indexSearcher, scoreDoc))
                     .map(objectMapper::from)
                     .collect(Collectors.toList());
+
+            indexReader.close();
+            return results;
         } catch (IOException e) {
             log.error("Failed to search documents");
             throw new RuntimeException(e);
         }
     }
 
-    private Document getDocument(ScoreDoc scoreDoc) {
+    private Document getDocument(IndexSearcher indexSearcher, ScoreDoc scoreDoc) {
         try {
             return indexSearcher.doc(scoreDoc.doc);
         } catch (IOException e) {
@@ -67,8 +65,13 @@ public class BaseReader<T> implements Reader<T> {
     }
 
     @Override
-    public void close() throws IOException {
-        IOUtils.close(directory, indexReader);
-        log.debug("Reader closed");
+    public void close() {
+        try {
+            IOUtils.close(directory);
+            log.debug("Reader closed");
+        } catch (IOException e) {
+            log.error("Failed closing reader");
+            throw new RuntimeException(e);
+        }
     }
 }

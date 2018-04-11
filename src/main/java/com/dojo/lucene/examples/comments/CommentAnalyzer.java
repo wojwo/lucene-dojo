@@ -1,10 +1,9 @@
-package com.dojo.lucene;
+package com.dojo.lucene.examples.comments;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.core.WhitespaceTokenizer;
 
-class WhitespaceAnalyzer extends Analyzer {
-
+class CommentAnalyzer extends Analyzer {
     @Override
     protected TokenStreamComponents createComponents(String fieldName) {
         return new TokenStreamComponents(

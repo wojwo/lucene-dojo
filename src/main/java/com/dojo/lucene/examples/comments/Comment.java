@@ -1,4 +1,4 @@
-package com.dojo.lucene.examples._1;
+package com.dojo.lucene.examples.comments;
 
 import lombok.AllArgsConstructor;
 import lombok.Value;

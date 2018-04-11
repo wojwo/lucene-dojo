@@ -1,4 +1,4 @@
-package com.dojo.lucene.examples._1;
+package com.dojo.lucene.examples.comments;
 
 import com.dojo.lucene.common.ObjectMapper;
 import org.apache.lucene.document.Document;

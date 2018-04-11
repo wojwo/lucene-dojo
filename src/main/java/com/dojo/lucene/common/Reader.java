@@ -8,5 +8,5 @@ import java.util.List;
 public interface Reader<T> extends Closeable {
 
     List<T> find(Query query);
-    List<T> find(Query query, int numberOfResults);
+    List<T> find(Query query, int size);
 }

@@ -1,4 +1,4 @@
-package com.dojo.lucene;
+package com.dojo.lucene.examples.addresses;
 
 import lombok.AllArgsConstructor;
 
