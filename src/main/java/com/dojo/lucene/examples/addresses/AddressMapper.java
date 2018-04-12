@@ -2,6 +2,9 @@ package com.dojo.lucene.examples.addresses;
 
 import com.dojo.lucene.common.ObjectMapper;
 import org.apache.lucene.document.Document;
+import org.apache.lucene.document.Field;
+import org.apache.lucene.document.StringField;
+import org.apache.lucene.document.TextField;
 
 class AddressMapper implements ObjectMapper<Address> {
     public static final String POSTCODE_FIELD = "postcode";
@@ -12,8 +15,14 @@ class AddressMapper implements ObjectMapper<Address> {
 
     @Override
     public Document toDocument(Address address) {
-        // TODO: Implement me
-        throw new UnsupportedOperationException("Implement me");
+        Document document = new Document();
+        document.add(new StringField(POSTCODE_FIELD, address.getPostcode().toString(), Field.Store.YES));
+        document.add(new TextField(ADDRESS_LINE_FIELD, address.getAddressLine(), Field.Store.YES));
+        document.add(new StringField(IS_ACTIVE_FIELD, address.getIsActive().toString(), Field.Store.YES));
+        address.getPostTown().ifPresent(postTown -> document.add(new TextField(POSTTOWN_FIELD, postTown, Field.Store.YES)));
+
+        return document;
+
     }
 
     @Override
