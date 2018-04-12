@@ -1,14 +1,10 @@
 package com.dojo.lucene.examples.addresses
 
 import com.google.common.collect.Lists
-import org.apache.lucene.index.Term
 import org.apache.lucene.queryparser.classic.MultiFieldQueryParser
 import org.apache.lucene.queryparser.classic.QueryParser
 import org.apache.lucene.search.Query
-import org.apache.lucene.search.TermQuery
-import org.apache.lucene.search.TopDocs
 
-import static com.dojo.lucene.examples.addresses.AddressAnalyzer.customForbiddenWords
 import static com.dojo.lucene.examples.addresses.AddressMapper.*
 
 class Reader_3_Spec extends ReaderSpecBase {

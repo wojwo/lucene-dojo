@@ -2,9 +2,6 @@ package com.dojo.lucene.examples.addresses;
 
 import com.dojo.lucene.common.ObjectMapper;
 import org.apache.lucene.document.Document;
-import org.apache.lucene.document.Field;
-import org.apache.lucene.document.StringField;
-import org.apache.lucene.document.TextField;
 
 class AddressMapper implements ObjectMapper<Address> {
     public static final String POSTCODE_FIELD = "postcode";

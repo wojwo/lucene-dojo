@@ -2,13 +2,9 @@ package com.dojo.lucene.examples.addresses
 
 import com.google.common.collect.Lists
 import org.apache.lucene.index.Term
-import org.apache.lucene.queryparser.classic.MultiFieldQueryParser
-import org.apache.lucene.queryparser.classic.QueryParser
-import org.apache.lucene.search.Query
 import org.apache.lucene.search.TermQuery
-import spock.lang.Unroll
 
-import static com.dojo.lucene.examples.addresses.AddressMapper.*
+import static com.dojo.lucene.examples.addresses.AddressMapper.ADDRESS_LINE_FIELD
 
 class Reader_4_Spec extends ReaderSpecBase {
 

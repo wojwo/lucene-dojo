@@ -5,8 +5,6 @@ import org.apache.lucene.index.Term
 import org.apache.lucene.search.MatchAllDocsQuery
 import org.apache.lucene.search.TermQuery
 
-import static com.dojo.lucene.examples.addresses.AddressAnalyzer.*
-
 class Reader_1_Spec extends ReaderSpecBase {
 
     def "should retrieve all addresses"() {

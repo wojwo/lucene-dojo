@@ -1,9 +1,9 @@
 package com.dojo.lucene.examples.addresses;
 
 import com.google.common.collect.Lists;
-import org.apache.lucene.analysis.*;
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
-import org.apache.lucene.analysis.standard.StandardTokenizer;
 
 import java.io.Reader;
 import java.util.List;
