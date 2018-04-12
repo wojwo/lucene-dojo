@@ -42,7 +42,7 @@ class Reader_3_Spec extends ReaderSpecBase {
 
         when: 'retrieving address'
         QueryParser queryParser = new MultiFieldQueryParser([IS_ACTIVE_FIELD, POSTTOWN_FIELD] as String[], analyzer)
-        Query query = queryParser.parse("PUT YOUR QUERY HERE")
+        Query query = queryParser.parse("$IS_ACTIVE_FIELD:$isActive AND $POSTTOWN_FIELD:$postTown")
         def results = reader.find(query)
 
         then:
@@ -64,7 +64,7 @@ class Reader_3_Spec extends ReaderSpecBase {
 
         when: 'retrieving address'
         QueryParser queryParser = new QueryParser(POSTCODE_FIELD, analyzer)
-        Query query = queryParser.parse("PUT YOUR QUERY HERE")
+        Query query = queryParser.parse("${postcodePrefix}*")
         def results = reader.find(query)
 
         then:
