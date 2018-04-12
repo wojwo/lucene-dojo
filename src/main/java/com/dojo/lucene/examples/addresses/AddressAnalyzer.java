@@ -1,9 +1,7 @@
 package com.dojo.lucene.examples.addresses;
 
 import com.google.common.collect.Lists;
-import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.CharArraySet;
-import org.apache.lucene.analysis.Tokenizer;
+import org.apache.lucene.analysis.*;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
 
@@ -19,7 +17,9 @@ class AddressAnalyzer extends Analyzer {
     @Override
     protected TokenStreamComponents createComponents(String fieldName) {
         final Tokenizer tokenizer = new StandardTokenizer();
-        return new TokenStreamComponents(tokenizer);
+        TokenStream filter = new LowerCaseFilter(tokenizer);
+        filter = new StopFilter(filter, forbidenCharSet());
+        return new TokenStreamComponents(tokenizer, filter);
 
     }
 
