@@ -15,15 +15,8 @@ class AddressMapper implements ObjectMapper<Address> {
 
     @Override
     public Document toDocument(Address address) {
-        throw new UnsupportedOperationException("Implement me");
         // TODO: Implement me
-//        Document document = new Document();
-//        document.add(new StringField(POSTCODE_FIELD, address.getPostcode().toString(), Field.Store.YES));
-//        document.add(new TextField(ADDRESS_LINE_FIELD, address.getAddressLine(), Field.Store.YES));
-//        document.add(new StringField(IS_ACTIVE_FIELD, address.getIsActive().toString(), Field.Store.YES));
-//        address.getPostTown().ifPresent(postTown -> document.add(new TextField(POSTTOWN_FIELD, postTown, Field.Store.YES)));
-//
-//        return document;
+        throw new UnsupportedOperationException("Implement me");
     }
 
     @Override
